@@ -64,8 +64,7 @@ For i = 2 To stockEntries
         End If
             
         Cells(row, 11).Value = percentChange
-        
-        
+       
         'advance row in output table, clear holding variables
         row = row + 1
         
@@ -98,19 +97,19 @@ Cells(4, 14).Value = "Greatest Total Volume"
 
 For i = 2 To outputTableEntries
        
-    If biggestIncrease < Cells(i, 11).Value Then
+    If (biggestIncrease < Cells(i, 11).Value) Then
         biggestIncrease = Cells(i, 11).Value
         Cells(2, 15).Value = Cells(i, 9)
         Cells(2, 16).Value = biggestIncrease
         End If
         
-    If biggestDecrease > Cells(i, 11).Value Then
+    If (biggestDecrease > Cells(i, 11).Value) Then
         biggestDecrease = Cells(i, 11).Value
         Cells(3, 15).Value = Cells(i, 9)
         Cells(3, 16).Value = biggestDecrease
         End If
     
-    If biggestVolume < Cells(i, 12).Value Then
+    If (biggestVolume < Cells(i, 12).Value) Then
         biggestVolume = Cells(i, 12).Value
         Cells(4, 15).Value = Cells(i, 9)
         Cells(4, 16).Value = biggestVolume
