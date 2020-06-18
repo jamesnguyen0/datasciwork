@@ -40,7 +40,7 @@ For i = 2 To stockEntries
     End If
         
     'only execute if LAST instance of ticker
-    If (Not (ticker = tickerLeading)) Then
+    If Not (ticker = tickerLeading) Then
         Cells(row, 9).Value = ticker
         Cells(row, 12).Value = totalVolume
         
