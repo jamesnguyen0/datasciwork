@@ -39,7 +39,6 @@ For i = 2 To stockEntries
         
     totalVolume = totalVolume + Cells(i, 7).Value
         
-        
     'only execute and get open price if FIRST instance of ticker
     If Not (ticker = tickerTrailing) Then
         priceArray(0) = Cells(i, 3).Value
@@ -70,7 +69,6 @@ For i = 2 To stockEntries
         End If
             
         Cells(row, 11).Value = percentChange
-        
         
         'advance row in output table, clear holding variables
         row = row + 1
