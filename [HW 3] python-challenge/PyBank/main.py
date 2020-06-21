@@ -44,13 +44,15 @@ with open(pybank_csv) as csvfile:
     print(f"Greatest Decrease in Profits: {maxDecrease[0]} (${maxDecrease[1]})")
 
     #prep text for output to .txt
-    text = ["Financial Analysis",
-        "----------------------------",
-        "Total Months: " + str(months),
-        "Total: $" + str(netChange),
-        "Average Change: $" + str(avgChange),
-        "Greatest Increase in Profits: " + maxIncrease[0] + " $" + str(maxIncrease[1]),
-        "Greatest Decrease in Profits: " + maxDecrease[0] + " $" + str(maxDecrease[1])]
+    text = []
+    
+    text.append("Financial Analysis")
+    text.append("----------------------------")
+    text.append("Total Months: " + str(months))
+    text.append("Total: $" + str(netChange))
+    text.append("Average Change: $" + str(avgChange))
+    text.append("Greatest Increase in Profits: " + maxIncrease[0] + " $" + str(maxIncrease[1]))
+    text.append("Greatest Decrease in Profits: " + maxDecrease[0] + " $" + str(maxDecrease[1]))
     
     outputtext = zip(text)
 

@@ -7,10 +7,10 @@ totalVotes = 0
 winner = ""
 
 candidateID = 0
-candidateIndex = []
 candidateList = []
-candidatePercent = []
 candidateVotes = []
+candidatePercent = []
+
 
 
 
@@ -26,8 +26,6 @@ with open(pybank_csv) as csvfile:
     for row in csvreader:
         #if candidate is not in list already, add to list and increment voter total
         if not(row[2] in candidateList):
-            candidateIndex.append(candidateID)
-            candidateID += 1
             candidateList.append(row[2])
             candidateVotes.append(1)
             totalVotes += 1
@@ -50,7 +48,6 @@ with open(pybank_csv) as csvfile:
     
     winner = candidateList[candidateID]
 
-
     #output to console
     print("Election Results")
     print("-------------------------")
@@ -64,6 +61,7 @@ with open(pybank_csv) as csvfile:
 
     #prep text for output to .txt
     text = []
+
     text.append("Election Results")
     text.append("-------------------------")
     text.append("Total Votes: " + str(totalVotes))
@@ -73,7 +71,7 @@ with open(pybank_csv) as csvfile:
     text.append("-------------------------")
     text.append("Winner: " + winner)
     text.append("-------------------------")
-
+    
     outputtext = zip(text)
 
 #write files
