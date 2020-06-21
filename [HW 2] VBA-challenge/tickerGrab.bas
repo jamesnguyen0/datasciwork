@@ -1,8 +1,7 @@
-Attribute VB_Name = "Module1"
 Sub tickerGrab():
 
+Dim ws As Worksheet
 Dim stockEntries As Double
-stockEntries = WorksheetFunction.CountA(Range("A:A"))
 
 'input variables
 Dim tickerTrailing As String
@@ -17,13 +16,20 @@ Dim totalVolume As Double
 
 'output table variables
 Dim row As Integer
-row = 2 'start table at top of sheet, minus header
+
+'loop through each sheet in book
+For Each ws In Worksheets
+
+ws.Activate
 
 'output table 1
 Cells(1, 9).Value = "Ticker"
 Cells(1, 10).Value = "Yearly Change"
 Cells(1, 11).Value = "Percent Change"
 Cells(1, 12).Value = "Total Stock Volume"
+
+stockEntries = WorksheetFunction.CountA(Range("A:A"))
+row = 2 'start table at top of sheet, minus header
 
 For i = 2 To stockEntries
        
@@ -33,14 +39,13 @@ For i = 2 To stockEntries
         
     totalVolume = totalVolume + Cells(i, 7).Value
         
-        
     'only execute and get open price if FIRST instance of ticker
     If Not (ticker = tickerTrailing) Then
         priceArray(0) = Cells(i, 3).Value
     End If
         
     'only execute if LAST instance of ticker
-    If Not (ticker = tickerLeading) Then
+    If (Not (ticker = tickerLeading)) Then
         Cells(row, 9).Value = ticker
         Cells(row, 12).Value = totalVolume
         
@@ -64,7 +69,7 @@ For i = 2 To stockEntries
         End If
             
         Cells(row, 11).Value = percentChange
-       
+        
         'advance row in output table, clear holding variables
         row = row + 1
         
@@ -97,29 +102,40 @@ Cells(4, 14).Value = "Greatest Total Volume"
 
 For i = 2 To outputTableEntries
        
-    If (biggestIncrease < Cells(i, 11).Value) Then
+    If biggestIncrease < Cells(i, 11).Value Then
         biggestIncrease = Cells(i, 11).Value
         Cells(2, 15).Value = Cells(i, 9)
         Cells(2, 16).Value = biggestIncrease
         End If
         
-    If (biggestDecrease > Cells(i, 11).Value) Then
+    If biggestDecrease > Cells(i, 11).Value Then
         biggestDecrease = Cells(i, 11).Value
         Cells(3, 15).Value = Cells(i, 9)
         Cells(3, 16).Value = biggestDecrease
         End If
     
-    If (biggestVolume < Cells(i, 12).Value) Then
+    If biggestVolume < Cells(i, 12).Value Then
         biggestVolume = Cells(i, 12).Value
         Cells(4, 15).Value = Cells(i, 9)
         Cells(4, 16).Value = biggestVolume
         End If
+            
 Next i
+
+'reset holding variables for next loop
+biggestIncrease = 0
+biggestDecrease = 0
+biggestVolume = 0
 
 'table 2 formatting
 Range("P2", "P3").NumberFormat = "0.00%"
 Range("N:P").Columns.AutoFit
 
+Next ws
+
 End Sub
+
+
+
 
 
